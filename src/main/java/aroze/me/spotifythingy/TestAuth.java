@@ -53,8 +53,15 @@ public class TestAuth implements CommandExecutor {
             .queryString("redirect_uri", redirect_uri)
             .asJson();
 
+        String url = "https://accounts.spotify.com/authorize";
+        url += "?response_type=token";
+        url += "&client_id=" + client_id;
+        url += "&scope=user-read-private%20user-read-email";
+        url += "&redirect_uri=" + redirect_uri;
+
         sender.sendMessage(response3.isSuccess() + "");
         sender.sendMessage(response3.getStatusText());
+        sender.sendMessage(url);
 
 
         return true;

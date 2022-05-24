@@ -1,4 +1,4 @@
 Spotify:
   clientID: "uh"
   clientSecret: "um"
-  redirectURI: "http://localhost:8080/callback"
+  redirectURI: "http://localhost:8888/callback"
