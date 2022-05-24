@@ -4,3 +4,5 @@ main: aroze.me.spotifythingy.SpotifyThingy
 api-version: 1.18
 authors: [ Aroze ]
 description: A cool thingy for Spotify integration with your Minecraft server
+commands:
+  testauth: {}
