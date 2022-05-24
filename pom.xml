@@ -71,5 +71,10 @@
             <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.13.8</version>
+        </dependency>
     </dependencies>
 </project>
