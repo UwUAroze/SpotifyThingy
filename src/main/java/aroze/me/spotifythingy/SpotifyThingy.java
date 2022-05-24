@@ -7,6 +7,9 @@ public final class SpotifyThingy extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+
+        saveDefaultConfig();
+
         getCommand("testauth").setExecutor(new TestAuth());
     }
 
