@@ -39,6 +39,16 @@ public class TestAuth implements CommandExecutor {
 
         sender.sendMessage(response.getBody().toPrettyString());
 
+        HttpResponse<JsonNode> response2 = Unirest.get("https://accounts.spotify.com/authorize?")
+            .queryString("response_type", "code")
+            .queryString("client_id", client_id)
+            .queryString("scope", "user-read-private user-read-email")
+            .queryString("redirect_uri", redirect_uri)
+            .asJson();
+
+        sender.sendMessage(response2.getBody().toPrettyString());
+
+
         return true;
     }
 }
