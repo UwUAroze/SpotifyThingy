@@ -22,10 +22,12 @@ public class TestAuth implements CommandExecutor {
 
         String client_id = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientID");
         String client_secret = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientSecret");
+        String redirect_uri = SpotifyThingy.getInstance().getConfig().getString("Spotify.redirectURI");
 
         sender.sendMessage(ChatUtils.color("\n&7&oAttempting to authenticate with Spotify...\n"));
         sender.sendMessage(ChatUtils.color("&cClient ID: &7" + client_id));
         sender.sendMessage(ChatUtils.color("&cClient Secret: &7" + client_secret));
+        sender.sendMessage(ChatUtils.color("&cRedirect URI: &7" + redirect_uri));
         sender.sendMessage("\n");
 
         HttpResponse<JsonNode> response = Unirest.post("https://accounts.spotify.com/api/token")
