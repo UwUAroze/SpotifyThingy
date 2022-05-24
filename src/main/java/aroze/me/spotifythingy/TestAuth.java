@@ -32,6 +32,7 @@ public class TestAuth implements CommandExecutor {
             .header("accept", "application/json")
             .basicAuth(client_id, client_secret)
             .contentType("application/x-www-form-urlencoded")
+            .field("grant_type", "client_credentials")
             .asJson();
 
         sender.sendMessage(response.getBody().toPrettyString());
