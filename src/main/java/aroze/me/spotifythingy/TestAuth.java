@@ -10,6 +10,11 @@ public class TestAuth implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
+        if (!sender.hasPermission("spotifythingy.admin")) {
+            sender.sendMessage(ChatUtils.color("&c⚠ &#ff7f6eYou aren't allowed to do this! smh!"));
+            return true;
+        }
+
         String client_id = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientID");
         String client_secret = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientSecret");
 
