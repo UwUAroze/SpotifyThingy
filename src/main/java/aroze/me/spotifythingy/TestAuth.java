@@ -49,7 +49,7 @@ public class TestAuth implements CommandExecutor {
         HttpResponse<JsonNode> response3 = Unirest.get("https://accounts.spotify.com/authorize?")
             .queryString("response_type", "code")
             .queryString("client_id", client_id)
-            .queryString("scope", "user-read-private user-read-email")
+            .queryString("scope", "user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control streaming")
             .queryString("redirect_uri", redirect_uri)
             .asJson();
 
