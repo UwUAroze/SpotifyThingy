@@ -30,8 +30,8 @@ public class TestAuth implements CommandExecutor {
 
         HttpResponse<JsonNode> response = Unirest.post("https://accounts.spotify.com/api/token")
             .header("accept", "application/json")
-            .queryString("Authorization", "Basic " + client_id + ":" + client_secret)
-            .field("grant_type", "client_credentials")
+            .basicAuth(client_id, client_secret)
+            .contentType("application/x-www-form-urlencoded")
             .asJson();
 
         sender.sendMessage(response.getBody().toPrettyString());
