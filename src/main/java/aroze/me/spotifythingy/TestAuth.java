@@ -38,15 +38,23 @@ public class TestAuth implements CommandExecutor {
             .asJson();
 
         sender.sendMessage(response.getBody().toPrettyString());
+        String token = response.getBody().getObject().getString("access_token");
 
-        HttpResponse<JsonNode> response2 = Unirest.get("https://accounts.spotify.com/authorize?")
+        sender.sendMessage(ChatUtils.color("\n&7&oAttempting to get user info...\n"));
+        HttpResponse<JsonNode> response2 = Unirest.get("https://api.spotify.com/v1/users/aroze123")
+                .header("Authorization", "Bearer " + token)
+                .asJson();
+        sender.sendMessage(response2.getBody().toPrettyString());
+
+        HttpResponse<JsonNode> response3 = Unirest.get("https://accounts.spotify.com/authorize?")
             .queryString("response_type", "code")
             .queryString("client_id", client_id)
             .queryString("scope", "user-read-private user-read-email")
             .queryString("redirect_uri", redirect_uri)
             .asJson();
 
-        sender.sendMessage(response2.getBody().toPrettyString());
+        sender.sendMessage(response3.isSuccess() + "");
+        sender.sendMessage(response3.getStatusText());
 
 
         return true;
