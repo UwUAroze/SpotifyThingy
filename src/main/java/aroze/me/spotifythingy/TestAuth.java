@@ -12,8 +12,8 @@ public class TestAuth implements CommandExecutor {
         String client_id = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientID");
         String client_secret = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientSecret");
 
-        Bukkit.broadcastMessage("Client ID: " + client_id);
-        Bukkit.broadcastMessage("Client Secret: " + client_secret);
+        sender.sendMessage("Client ID: " + client_id);
+        sender.sendMessage("Client Secret: " + client_secret);
 
         return true;
     }
