@@ -1,10 +1,15 @@
 package aroze.me.spotifythingy;
 
 import aroze.me.spotifythingy.util.ChatUtils;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.nio.Buffer;
 
 public class TestAuth implements CommandExecutor {
     @Override
@@ -22,6 +27,14 @@ public class TestAuth implements CommandExecutor {
         sender.sendMessage(ChatUtils.color("&cClient ID: &7" + client_id));
         sender.sendMessage(ChatUtils.color("&cClient Secret: &7" + client_secret));
         sender.sendMessage("\n");
+
+        HttpResponse<JsonNode> response = Unirest.post("https://accounts.spotify.com/api/token")
+            .header("accept", "application/json")
+            .queryString("Authorization", "Basic " + client_id + ":" + client_secret)
+            .field("grant_type", "client_credentials")
+            .asJson();
+
+        sender.sendMessage(response.getBody().toPrettyString());
 
         return true;
     }
