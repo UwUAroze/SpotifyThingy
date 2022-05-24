@@ -56,7 +56,7 @@ public class TestAuth implements CommandExecutor {
         String url = "https://accounts.spotify.com/authorize";
         url += "?response_type=token";
         url += "&client_id=" + client_id;
-        url += "&scope=user-read-private%20user-read-email";
+        url += "&scope=user-modify-playback-state%20user-read-playback-state%20user-read-currently-playing%20app-remote-control%20streaming";
         url += "&redirect_uri=" + redirect_uri;
 
         sender.sendMessage(response3.isSuccess() + "");
