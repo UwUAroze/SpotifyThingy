@@ -45,12 +45,12 @@ public class JoinListener implements Listener {
 
                 if (isPlaying) {
                     spotifyPlayer.setProgress(barProgress);
-                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ &#1fb177" + name));
-                } else {
                     spotifyPlayer.setTitle(ChatUtils.color("&#51e285⏸ &#1fb177" + name));
+                } else {
+                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ &#1fb177" + name));
                 }
 
-            }, 0, 10);
+            }, 0, 1);
         }
     }
 
