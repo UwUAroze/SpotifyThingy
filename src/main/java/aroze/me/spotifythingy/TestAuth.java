@@ -43,6 +43,7 @@ public class TestAuth implements CommandExecutor {
                         .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
+                return true;
             }
 
             if (args[0].equalsIgnoreCase("next")) {
@@ -50,6 +51,7 @@ public class TestAuth implements CommandExecutor {
                         .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
+                return true;
             }
 
             if (args[0].equalsIgnoreCase("previous")) {
@@ -57,6 +59,7 @@ public class TestAuth implements CommandExecutor {
                         .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
+                return true;
             }
 
         }
