@@ -40,13 +40,18 @@ public class JoinListener implements Listener {
                         .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
                         .asJson();
 
+                Boolean isPlaying = response.getBody().getArray().getJSONObject(0).getBoolean("is_playing");
                 String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
                 double progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
                 double duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
-
                 double barProgress = progress / duration;
-                spotifyPlayer.setProgress(barProgress);
-                spotifyPlayer.setTitle(ChatUtils.color("&#51e285Now Playing: &#1fb177" + name));
+
+                if (isPlaying) {
+                    spotifyPlayer.setProgress(barProgress);
+                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ Now Playing: &#1fb177" + name));
+                } else {
+                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285⏸ Paused: &#1fb177" + name));
+                }
 
             }, 0, 20);
         }
