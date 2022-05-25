@@ -45,9 +45,9 @@ public class JoinListener implements Listener {
 
                 if (isPlaying) {
                     spotifyPlayer.setProgress(barProgress);
-                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ Now Playing: &#1fb177" + name));
+                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ &#1fb177" + name));
                 } else {
-                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285⏸ Paused: &#1fb177" + name));
+                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285⏸ &#1fb177" + name));
                 }
 
             }, 0, 20);
