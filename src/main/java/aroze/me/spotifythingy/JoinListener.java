@@ -1,10 +1,14 @@
 package aroze.me.spotifythingy;
 
 import aroze.me.spotifythingy.util.ChatUtils;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,11 +23,25 @@ public class JoinListener implements Listener {
                 BarColor.GREEN,
                 BarStyle.SOLID
         );
+
         spotifyPlayer.setProgress(0);
         spotifyPlayer.addPlayer(e.getPlayer());
-        BukkitTask updateSpotifyBar = Bukkit.getScheduler().runTaskTimer(SpotifyThingy.getInstance(), () -> {
 
-        }, 0, 1);
+        if (TestAuth.spotifyAuth.containsKey(e.getPlayer())) {
+
+            HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
+                    .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer()))
+                    .asJson();
+
+            String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
+            e.getPlayer().sendMessage("name: " + name);
+
+            //progress_ms =
+
+            BukkitTask updateSpotifyBar = Bukkit.getScheduler().runTaskTimer(SpotifyThingy.getInstance(), () -> {
+
+            }, 0, 1);
+        }
     }
 
 }
