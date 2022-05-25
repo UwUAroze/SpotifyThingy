@@ -36,7 +36,15 @@ public class JoinListener implements Listener {
                     .asJson();
 
             String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
+            int progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
+            int duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
+
+
             e.getPlayer().sendMessage("name: " + name);
+            e.getPlayer().sendMessage("progress: " + progress);
+            e.getPlayer().sendMessage("duration: " + duration);
+            e.getPlayer().sendMessage("progress%: " + progress/duration);
+
 
             //progress_ms =
 
