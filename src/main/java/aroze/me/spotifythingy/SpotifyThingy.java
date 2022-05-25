@@ -1,5 +1,6 @@
 package aroze.me.spotifythingy;
 
+import aroze.me.spotifythingy.commands.TestAuth;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SpotifyThingy extends JavaPlugin {

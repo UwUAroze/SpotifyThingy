@@ -1,5 +1,6 @@
-package aroze.me.spotifythingy;
+package aroze.me.spotifythingy.commands;
 
+import aroze.me.spotifythingy.SpotifyThingy;
 import aroze.me.spotifythingy.util.ChatUtils;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
