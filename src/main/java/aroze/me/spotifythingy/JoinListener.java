@@ -50,7 +50,7 @@ public class JoinListener implements Listener {
                     spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ &#1fb177" + name));
                 }
 
-            }, 0, 1);
+            }, 0, 3);
         }
     }
 
