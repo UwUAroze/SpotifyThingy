@@ -12,10 +12,11 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 public class TestAuth implements CommandExecutor {
+
+    HashMap<Player, String> spotifyAuth = new HashMap<>();
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        HashMap<Player, String> spotifyAuth = new HashMap<>();
 
         if (!sender.hasPermission("spotifythingy.admin")) {
             sender.sendMessage(ChatUtils.color("&c⚠ &#ff7f6eYou aren't allowed to do this! smh!"));
