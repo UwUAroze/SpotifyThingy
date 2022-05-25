@@ -22,17 +22,20 @@ public class TestAuth implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equalsIgnoreCase("settoken")) {
-            spotifyAuth.put((Player) sender, args[1]);
-            sender.sendMessage(ChatUtils.color("&a✔ &#ff7f6eSuccessfully set your auth token!"));
-        }
+        if (args.length > 0) {
+            if (args[0].equalsIgnoreCase("settoken")) {
+                spotifyAuth.put((Player) sender, args[1]);
+                sender.sendMessage(ChatUtils.color("&a✔ &#ff7f6eSuccessfully set your auth token!"));
+                return true;
+            }
 
-        if (args[0].equalsIgnoreCase("play")) {
-            HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/play")
-                    .basicAuth("Bearer", spotifyAuth.get((Player) sender))
-                    .asJson();
-            System.out.println(response.getBody().toPrettyString());
-            return true;
+            if (args[0].equalsIgnoreCase("play")) {
+                HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/play")
+                        .basicAuth("Bearer", spotifyAuth.get((Player) sender))
+                        .asJson();
+                System.out.println(response.getBody().toPrettyString());
+                return true;
+            }
         }
 
         String client_id = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientID");
