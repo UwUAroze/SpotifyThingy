@@ -46,6 +46,7 @@ public class JoinListener implements Listener {
 
                 double barProgress = progress / duration;
                 spotifyPlayer.setProgress(barProgress);
+                spotifyPlayer.setTitle(ChatUtils.color("&#51e285Spotify: &#1fb177Now Playing: " + name));
 
             }, 0, 1);
         }
