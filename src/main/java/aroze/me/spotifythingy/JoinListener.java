@@ -18,6 +18,7 @@ public class JoinListener implements Listener {
                 BarColor.GREEN,
                 BarStyle.SOLID
         );
+        spotifyPlayer.setProgress(0);
         spotifyPlayer.addPlayer(e.getPlayer());
     }
 
