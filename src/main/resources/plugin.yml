@@ -9,3 +9,7 @@ commands:
   play:
     aliases: [ resume ]
   pause: {}
+  skip:
+    aliases: [ next, forward ]
+  previous:
+    aliases: [ back, skipback, ]
