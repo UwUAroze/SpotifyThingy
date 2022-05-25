@@ -4,19 +4,34 @@ import aroze.me.spotifythingy.util.ChatUtils;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.nio.Buffer;
+import java.util.HashMap;
 
 public class TestAuth implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
+        HashMap<Player, String> spotifyAuth = new HashMap<>();
+
         if (!sender.hasPermission("spotifythingy.admin")) {
             sender.sendMessage(ChatUtils.color("&c⚠ &#ff7f6eYou aren't allowed to do this! smh!"));
+            return true;
+        }
+
+        if (args[0].equalsIgnoreCase("settoken")) {
+            spotifyAuth.put((Player) sender, args[1]);
+            sender.sendMessage(ChatUtils.color("&a✔ &#ff7f6eSuccessfully set your auth token!"));
+        }
+
+        if (args[0].equalsIgnoreCase("play")) {
+            HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/play")
+                    .basicAuth("Bearer", spotifyAuth.get((Player) sender))
+                    .asJson();
+            System.out.println(response.getBody().toPrettyString());
             return true;
         }
 
