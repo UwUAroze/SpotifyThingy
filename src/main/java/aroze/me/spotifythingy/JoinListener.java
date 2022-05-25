@@ -31,24 +31,21 @@ public class JoinListener implements Listener {
 
             e.getPlayer().sendMessage("a");
 
-            HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
-                    .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
-                    .asJson();
-
-            String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
-            double progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
-            double duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
-
-
-            e.getPlayer().sendMessage("name: " + name);
-            e.getPlayer().sendMessage("progress: " + progress);
-            e.getPlayer().sendMessage("duration: " + duration);
-            e.getPlayer().sendMessage("progress%: " + (Double) (progress/duration));
-
 
             //progress_ms =
 
             BukkitTask updateSpotifyBar = Bukkit.getScheduler().runTaskTimer(SpotifyThingy.getInstance(), () -> {
+
+                HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
+                        .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
+                        .asJson();
+
+                String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
+                double progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
+                double duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
+
+                double barProgress = progress / duration;
+                spotifyPlayer.setProgress(barProgress);
 
             }, 0, 1);
         }
