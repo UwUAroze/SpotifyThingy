@@ -8,6 +8,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitTask;
 
 public class JoinListener implements Listener {
 
@@ -20,6 +21,9 @@ public class JoinListener implements Listener {
         );
         spotifyPlayer.setProgress(0);
         spotifyPlayer.addPlayer(e.getPlayer());
+        BukkitTask updateSpotifyBar = Bukkit.getScheduler().runTaskTimer(SpotifyThingy.getInstance(), () -> {
+
+        }, 0, 1);
     }
 
 }
