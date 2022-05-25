@@ -27,10 +27,12 @@ public class JoinListener implements Listener {
         spotifyPlayer.setProgress(0);
         spotifyPlayer.addPlayer(e.getPlayer());
 
-        if (TestAuth.spotifyAuth.containsKey(e.getPlayer())) {
+        if (TestAuth.spotifyAuth.containsKey(e.getPlayer().getUniqueId())) {
+
+            e.getPlayer().sendMessage("a");
 
             HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
-                    .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer()))
+                    .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
                     .asJson();
 
             String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
