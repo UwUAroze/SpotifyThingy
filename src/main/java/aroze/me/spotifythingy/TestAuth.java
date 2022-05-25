@@ -33,7 +33,7 @@ public class TestAuth implements CommandExecutor {
                 HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/play")
                         .basicAuth("Bearer", spotifyAuth.get((Player) sender))
                         .asJson();
-                System.out.println(response.getBody().toPrettyString());
+                sender.sendMessage(response.getBody().toPrettyString());
                 return true;
             }
         }
