@@ -10,10 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class TestAuth implements CommandExecutor {
 
-    static HashMap<Player, String> spotifyAuth = new HashMap<>();
+    static HashMap<UUID, String> spotifyAuth = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,14 +26,14 @@ public class TestAuth implements CommandExecutor {
 
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("settoken")) {
-                spotifyAuth.put((Player) sender, args[1]);
+                spotifyAuth.put(((Player) sender).getUniqueId(), args[1]);
                 sender.sendMessage(ChatUtils.color("&a✔ &#ff7f6eSuccessfully set your auth token!"));
                 return true;
             }
 
             if (args[0].equalsIgnoreCase("play")) {
                 HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/play")
-                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .header("Authorization", "Bearer " + spotifyAuth.get(((Player) sender).getUniqueId()))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
                 return true;
@@ -40,7 +41,7 @@ public class TestAuth implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("pause")) {
                 HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/pause")
-                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .header("Authorization", "Bearer " + spotifyAuth.get(((Player) sender).getUniqueId()))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
                 return true;
@@ -48,7 +49,7 @@ public class TestAuth implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("next")) {
                 HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/next")
-                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .header("Authorization", "Bearer " + spotifyAuth.get(((Player) sender).getUniqueId()))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
                 return true;
@@ -56,7 +57,7 @@ public class TestAuth implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("previous")) {
                 HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/previous")
-                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .header("Authorization", "Bearer " + spotifyAuth.get(((Player) sender).getUniqueId()))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
                 return true;
@@ -64,7 +65,7 @@ public class TestAuth implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("playing")) {
                 HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
-                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .header("Authorization", "Bearer " + spotifyAuth.get(((Player) sender).getUniqueId()))
                         .asJson();
                 sender.sendMessage(response.getBody().toPrettyString());
                 return true;
