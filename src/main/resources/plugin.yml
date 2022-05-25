@@ -12,4 +12,4 @@ commands:
   skip:
     aliases: [ next, forward ]
   previous:
-    aliases: [ back, skipback, ]
+    aliases: [ back, skipback ]
