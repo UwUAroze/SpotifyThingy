@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class TestAuth implements CommandExecutor {
 
-    HashMap<Player, String> spotifyAuth = new HashMap<>();
+    static HashMap<Player, String> spotifyAuth = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
