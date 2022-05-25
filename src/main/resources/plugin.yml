@@ -6,3 +6,6 @@ authors: [ Aroze ]
 description: A cool thingy for Spotify integration with your Minecraft server
 commands:
   testauth: {}
+  play:
+    aliases: [ resume ]
+  pause: {}
