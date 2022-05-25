@@ -37,6 +37,28 @@ public class TestAuth implements CommandExecutor {
                 sender.sendMessage(response.getBody().toPrettyString());
                 return true;
             }
+
+            if (args[0].equalsIgnoreCase("pause")) {
+                HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/pause")
+                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .asJson();
+                sender.sendMessage(response.getBody().toPrettyString());
+            }
+
+            if (args[0].equalsIgnoreCase("next")) {
+                HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/next")
+                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .asJson();
+                sender.sendMessage(response.getBody().toPrettyString());
+            }
+
+            if (args[0].equalsIgnoreCase("previous")) {
+                HttpResponse<JsonNode> response = Unirest.put("https://api.spotify.com/v1/me/player/previous")
+                        .header("Authorization", "Bearer " + spotifyAuth.get((Player) sender))
+                        .asJson();
+                sender.sendMessage(response.getBody().toPrettyString());
+            }
+
         }
 
         String client_id = SpotifyThingy.getInstance().getConfig().getString("Spotify.clientID");
