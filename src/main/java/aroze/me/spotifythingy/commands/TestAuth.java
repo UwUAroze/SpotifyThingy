@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class TestAuth implements CommandExecutor {
 
-    static HashMap<UUID, String> spotifyAuth = new HashMap<>();
+    public static HashMap<UUID, String> spotifyAuth = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
