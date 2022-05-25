@@ -31,16 +31,13 @@ public class JoinListener implements Listener {
 
             e.getPlayer().sendMessage("a");
 
-
-            //progress_ms =
-
             BukkitTask updateSpotifyBar = Bukkit.getScheduler().runTaskTimer(SpotifyThingy.getInstance(), () -> {
 
                 HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
                         .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
                         .asJson();
 
-                Boolean isPlaying = response.getBody().getArray().getJSONObject(0).getBoolean("is_playing");
+                boolean isPlaying = response.getBody().getArray().getJSONObject(0).getBoolean("is_playing");
                 String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
                 double progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
                 double duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
