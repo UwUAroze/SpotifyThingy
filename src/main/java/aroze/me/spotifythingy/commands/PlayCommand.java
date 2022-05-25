@@ -26,7 +26,6 @@ public class PlayCommand implements CommandExecutor {
                     .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(player.getUniqueId()))
                     .asJson();
             sender.sendMessage(ChatUtils.color("&7&oResumed Spotify playback"));
-
             return true;
         }
 
