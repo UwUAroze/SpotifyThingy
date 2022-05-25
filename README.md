@@ -1,6 +1,5 @@
 # SpotifyThingy
-SpotifyThingy:
-Allows for control over Spotify playback along with duration bossbars, etc, through a Minecraft plugin.
+SpotifyThingy allows for control over Spotify playback along with duration bossbars, etc, through a Minecraft plugin.
 
 Here's a little preview of what there is so far:
 + https://www.youtube.com/watch?v=ltooOI4YDSA
