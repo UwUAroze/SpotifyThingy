@@ -33,24 +33,26 @@ public class JoinListener implements Listener {
 
             BukkitTask updateSpotifyBar = Bukkit.getScheduler().runTaskTimer(SpotifyThingy.getInstance(), () -> {
 
-                HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
-                        .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
-                        .asJson();
+                Bukkit.getScheduler().runTaskAsynchronously(SpotifyThingy.getInstance(), () -> {
+                    HttpResponse<JsonNode> response = Unirest.get("https://api.spotify.com/v1/me/player/currently-playing")
+                            .header("Authorization", "Bearer " + TestAuth.spotifyAuth.get(e.getPlayer().getUniqueId()))
+                            .asJson();
+                        boolean isPlaying = response.getBody().getArray().getJSONObject(0).getBoolean("is_playing");
+                        String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
+                        double progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
+                        double duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
+                        double barProgress = progress / duration;
 
-                boolean isPlaying = response.getBody().getArray().getJSONObject(0).getBoolean("is_playing");
-                String name = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getString("name");
-                double progress = response.getBody().getArray().getJSONObject(0).getInt("progress_ms");
-                double duration = response.getBody().getArray().getJSONObject(0).getJSONObject("item").getInt("duration_ms");
-                double barProgress = progress / duration;
 
-                if (isPlaying) {
-                    spotifyPlayer.setProgress(barProgress);
-                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285⏸ &#1fb177" + name));
-                } else {
-                    spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ &#1fb177" + name));
-                }
+                        if (isPlaying) {
+                            spotifyPlayer.setProgress(barProgress);
+                            spotifyPlayer.setTitle(ChatUtils.color("&#51e285⏸ &#1fb177" + name));
+                        } else {
+                            spotifyPlayer.setTitle(ChatUtils.color("&#51e285▶ &#1fb177" + name));
+                        }
+                });
 
-            }, 0, 5);
+            }, 0, 15);
         }
     }
 
