@@ -1,7 +1,7 @@
 # SpotifyThingy; control your music through Minecraft
 
-Here's a little preview:
-+ https://www.youtube.com/watch?v=ltooOI4YDSA
+Here's a cool little preview :)<br>
+https://www.youtube.com/watch?v=ltooOI4YDSA
 
 <br>Although...
 + This plugin isn't production ready, probably won't ever be:
